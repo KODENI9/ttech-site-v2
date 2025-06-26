@@ -1,28 +1,30 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../lib/server";
-import logo  from "../assets/logo-black.png"
+import logo from "../assets/logo-black.png"
 export default function ChallengePage() {
   const router = useRouter();
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const correctPassword = "fjpbfdbfhjjprbhhdfffnn"; // Clé secrète finale
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (u) => {
-      if (!u) {
-        router.push("/login");
-      } else {
-        setUser(u);
-      }
-    });
-    return () => unsubscribe();
-  }, []);
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (u) => {
+    if (!u) {
+      router.push("/login");
+    } else {
+      setUser(u);
+    }
+  });
+  return () => unsubscribe();
+}, [router]); // ✅ Ajout de router
+
 
   const handleValidate = () => {
     if (password.trim().toLowerCase() === correctPassword) {
@@ -55,10 +57,12 @@ export default function ChallengePage() {
 
         {/* Partie validation */}
         <div className="flex flex-col items-center justify-center text-center space-y-4">
-          <img
-            src={logo.src}
+          <Image
+            src={logo}
             alt="Logo TTECH™"
-            className="w-24 h-24 rounded-full object-contain"
+            className="rounded-full object-contain"
+            width={96}
+            height={96}
           />
           <h2 className="text-2xl font-bold">TTECH™ COMMUNITY</h2>
           <p>Entrez la clé du casse-tête</p>
@@ -78,4 +82,3 @@ export default function ChallengePage() {
     </div>
   );
 }
-  
