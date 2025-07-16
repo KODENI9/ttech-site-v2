@@ -42,7 +42,9 @@ export default function MembersSection() {
           <button
             className="btn btn-success"
             onClick={() =>
-              (document.getElementById("add_member_modal") as HTMLDialogElement).showModal()
+              (
+                document.getElementById("add_member_modal") as HTMLDialogElement
+              ).showModal()
             }
           >
             ➕ Ajouter un membre
@@ -52,46 +54,79 @@ export default function MembersSection() {
 
       <div className="grid md:grid-cols-2 gap-4">
         {members.map((m) => (
-          <div key={m.id} className="card bg-base-100 shadow-md p-4 border">
-            {m.image && (
-              <img
-                src={m.image}
-                alt={m.name}
-                className="w-20 h-20 rounded-full object-cover mb-3"
-              />
-            )}
-            <h3 className="text-xl font-semibold">{m.name}</h3>
-            <p className="text-sm text-primary">{m.role}</p>
-            <p className="mt-2 text-sm">{m.description}</p>
-            <p className="mt-2 text-xs text-gray-500">
-              📧 {m.email}
-              {m.github && (
-                <>
-                  <br />
-                  🔗 <a href={m.github} className="link text-blue-500" target="_blank">GitHub</a>
-                </>
-              )}
-            </p>
+          <div
+            key={m.id}
+            className="relative group bg-gradient-to-br from-base-100 to-base-200 rounded-xl md:rounded-bl-[2rem] rounded-tr-[3rem] shadow-md border border-secondary/20 overflow-hidden transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:rotate-1"
+          >
+            {/* Bande verticale violette à gauche */}
+            <div className="absolute left-0 top-0 h-full w-2 bg-secondary rounded-r"></div>
 
-            {isAdmin && (
-              <div className="mt-4 flex gap-2">
-                <button
-                  className="btn btn-sm btn-warning"
-                  onClick={() => {
-                    setMemberToEdit(m);
-                    (document.getElementById("edit_member_modal") as HTMLDialogElement).showModal();
-                  }}
-                >
-                  ✏️ Modifier
-                </button>
-                <button
-                  className="btn btn-sm btn-error"
-                  onClick={() => handleDelete(m.id!)}
-                >
-                  🗑 Supprimer
-                </button>
+            <div className="card-body p-6 space-y-3">
+              {/* Image */}
+              {m.image && (
+                <div className="flex justify-center">
+                  <img
+                    src={m.image}
+                    alt={m.name}
+                    className="w-20 h-20 rounded-full object-cover border-2 border-secondary shadow mb-2 group-hover:scale-105 transition"
+                  />
+                </div>
+              )}
+
+              {/* Nom et rôle */}
+              <h3 className="text-xl font-bold text-center text-primary">
+                {m.name}
+              </h3>
+              <p className="text-center text-sm text-secondary">{m.role}</p>
+
+              {/* Description */}
+              <p className="text-sm text-center text-gray-600">
+                {m.description}
+              </p>
+
+              {/* Email & GitHub */}
+              <div className="text-xs text-center text-gray-500 mt-2">
+                📧 {m.email}
+                {m.github && (
+                  <>
+                    <br />
+                    🔗{" "}
+                    <a
+                      href={m.github}
+                      target="_blank"
+                      className="link text-blue-500"
+                    >
+                      GitHub
+                    </a>
+                  </>
+                )}
               </div>
-            )}
+
+              {/* Admin only actions */}
+              {isAdmin && (
+                <div className="mt-4 flex justify-center gap-2 flex-wrap">
+                  <button
+                    className="btn btn-sm btn-outline btn-warning"
+                    onClick={() => {
+                      setMemberToEdit(m);
+                      (
+                        document.getElementById(
+                          "edit_member_modal"
+                        ) as HTMLDialogElement
+                      ).showModal();
+                    }}
+                  >
+                    ✏️ Modifier
+                  </button>
+                  <button
+                    className="btn btn-sm btn-outline btn-error"
+                    onClick={() => handleDelete(m.id!)}
+                  >
+                    🗑 Supprimer
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>

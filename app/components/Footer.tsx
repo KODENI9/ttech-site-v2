@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-
+import Image from "next/image"
 import logo  from "../assets/logo-black.png"
 export default function Footer() {
   return (
@@ -9,7 +9,7 @@ export default function Footer() {
         
         {/* Logo & intro */}
         <div>
-          <img src={logo.src} alt="TTECH Logo" className="w-28 mb-3" />
+          <Image src={logo} alt="TTECH Logo" width={100} height={40} />
           <p className="text-sm">
             Pionniers de l'innovation technologique africaine depuis 2023.
           </p>

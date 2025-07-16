@@ -64,65 +64,73 @@ export default function ProjetsEnCours() {
             <div className="grid md:grid-cols-2 gap-4">
                 {projects.map((p) => (
                     <div
-                        key={p.id}
-                        className="card shadow-xl bg-gradient-to-br from-base-100 to-base-200 border border-base-300 hover:shadow-2xl transition duration-300"
-                    >
-                        <div className="card-body space-y-4">
-                            <h2 className="card-title text-xl text-primary">🚀 {p.title}</h2>
+  key={p.id}
+  className="relative group bg-gradient-to-br from-base-100 to-base-200 rounded-xl md:rounded-br-[3rem] rounded-tl-[2rem] shadow-md border border-primary/30 overflow-hidden transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:-rotate-1"
+>
+  {/* Badge "🔥 En cours" */}
+  <div className="absolute top-3 right-3 bg-orange-100 text-orange-600 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+    🔥 En cours
+  </div>
 
-                            <p className="text-gray-600">{p.description}</p>
+  {/* Bande verticale à gauche */}
+  <div className="absolute left-0 top-0 h-full w-2 bg-primary rounded-r"></div>
 
-                            {p.link && (
-                                <a
-                                    href={p.link}
-                                    target="_blank"
-                                    className="link text-blue-600"
-                                >
-                                    🔗 Voir le projet
-                                </a>
-                            )}
+  {/* Contenu */}
+  <div className="card-body p-6 space-y-3">
+    <h2 className="card-title text-xl font-bold text-primary">
+      🚀 {p.title}
+    </h2>
 
-                            <div className="flex flex-col md:flex-row justify-between gap-4 items-start md:items-center">
-                                {/* 📊 Barre de progression */}
-                                <div className="w-full md:w-2/3">
-                                    <label className="text-sm text-gray-500 mb-1 block">
-                                        ⏳ Progression du projet
-                                    </label>
-                                    <progress
-                                        className="progress progress-primary w-full"
-                                        value={p.progress ?? 0}
-                                        max="100"
-                                    ></progress>
-                                    <div className="text-right text-xs text-gray-500 mt-1">
-                                        {p.progress ?? 0}%
-                                    </div>
-                                </div>
+    <p className="text-gray-600">{p.description}</p>
 
-                                {/* 🛠️ Actions */}
-                                {(user?.uid === p.uid || user?.email === ADMIN_EMAIL) && (
-                                    <div className="flex flex-wrap gap-2 justify-end">
-                                        <button
-                                            className="btn btn-sm btn-outline btn-warning"
-                                            onClick={() => openEditModal(p)}
-                                        >
-                                            ✏️ Modifier
-                                        </button>
-                                        <button
-                                            className="btn btn-sm btn-outline btn-error"
-                                            onClick={async () => {
-                                                if (confirm("Confirmer la suppression du projet ?")) {
-                                                    await deleteProject(p.id);
-                                                    fetchProjects();
-                                                }
-                                            }}
-                                        >
-                                            🗑 Supprimer
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    </div>
+    {p.link && (
+      <a
+        href={p.link}
+        target="_blank"
+        className="text-blue-600 hover:underline text-sm inline-block"
+      >
+        🔗 Voir le projet
+      </a>
+    )}
+
+    {/* 📊 Progression */}
+    <div className="flex flex-col gap-1">
+      <label className="text-sm text-gray-500">⏳ Progression</label>
+      <progress
+        className="progress progress-primary w-full"
+        value={p.progress ?? 0}
+        max="100"
+      ></progress>
+      <div className="text-right text-xs text-gray-400">
+        {p.progress ?? 0}%
+      </div>
+    </div>
+
+    {/* 🛠️ Actions */}
+    {(user?.uid === p.uid || user?.email === ADMIN_EMAIL) && (
+      <div className="flex justify-end gap-2 mt-4 flex-wrap">
+        <button
+          className="btn btn-sm btn-outline btn-warning"
+          onClick={() => openEditModal(p)}
+        >
+          ✏️ Modifier
+        </button>
+        <button
+          className="btn btn-sm btn-outline btn-error"
+          onClick={async () => {
+            if (confirm("Confirmer la suppression du projet ?")) {
+              await deleteProject(p.id);
+              fetchProjects();
+            }
+          }}
+        >
+          🗑 Supprimer
+        </button>
+      </div>
+    )}
+  </div>
+</div>
+
  
                 ))}
 

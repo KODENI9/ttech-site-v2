@@ -8,6 +8,7 @@ import { MemberModel } from "../types/MemberModel";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { HistoryModel } from "../types/HistoryModel";
 import { EventModel } from "../types/Event";
+import { v4 as uuidv4 } from "uuid";
 
 
 export async function registerUser(
@@ -74,19 +75,14 @@ export async function getMembers(): Promise<MemberModel[]> {
 }
 
 // ➕ Ajouter un membre
-export async function addMember(member: MemberModel, file?: File) {
-  let imageUrl = "";
-  if (file) {
-    const storageRef = ref(storage, `members/${Date.now()}_${file.name}`);
-    await uploadBytes(storageRef, file);
-    imageUrl = await getDownloadURL(storageRef);
-  }
+export const addMember = async (member: MemberModel) => {
+    const id = uuidv4(); // ou autre identifiant
+    await setDoc(doc(db, "members", id), {
+        ...member,
+        createdAt: serverTimestamp(),
+    });
+};
 
-  await addDoc(collection(db, "members"), {
-    ...member,
-    image: imageUrl,
-  });
-}
 
 // ✏️ Modifier un membre
 export async function updateMember(id: string, data: Partial<MemberModel>) {

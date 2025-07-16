@@ -12,6 +12,6 @@ export default function Home() {
       <MembresSection />
       <HistorySection />
       <Evenements/>
-    </main>
+    </main> 
   );
 }

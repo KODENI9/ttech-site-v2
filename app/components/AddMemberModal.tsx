@@ -17,21 +17,41 @@ export default function AddMemberModal({ onAdded }: { onAdded: () => void }) {
     const [file, setFile] = useState<File | null>(null);
     const [loading, setLoading] = useState(false);
 
-    const handleAdd = async () => {
-        setLoading(true);
-        await addMember(form, file ?? undefined);
-        setLoading(false);
-        setForm({
-            name: "",
-            role: "",
-            description: "",
-            email: "",
-            github: "",
-        });
-        setFile(null);
-        onAdded();
-        (document.getElementById("add_member_modal") as HTMLDialogElement).close();
-    };
+const handleAdd = async () => {
+    setLoading(true);
+
+    let photoBase64 = "";
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onloadend = async () => {
+            photoBase64 = reader.result?.toString() || "";
+
+            await addMember({ ...form, image: photoBase64 }); // on ajoute la photo comme string
+
+            resetForm();
+        };
+        reader.readAsDataURL(file);
+    } else {
+        await addMember({ ...form, image: "" }); // pas de photo
+        resetForm();
+    }
+};
+
+const resetForm = () => {
+    setLoading(false);
+    setForm({
+        name: "",
+        role: "",
+        description: "",
+        email: "",
+        github: "",
+    });
+    setFile(null);
+    onAdded();
+    (document.getElementById("add_member_modal") as HTMLDialogElement).close();
+};
+
 
     return (
         <dialog id="add_member_modal" className="modal">

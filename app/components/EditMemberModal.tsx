@@ -12,16 +12,30 @@ export default function EditMemberModal({
   onUpdated: () => void;
 }) {
   const [form, setForm] = useState<MemberModel>(member);
+  const [file, setFile] = useState<File | null>(null);
 
   useEffect(() => {
     setForm(member);
   }, [member]);
 
+ 
   const handleUpdate = async () => {
+  if (file) {
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const base64 = reader.result?.toString() || "";
+      await updateMember(member.id!, { ...form, image: base64 });
+      onUpdated();
+      (document.getElementById("edit_member_modal") as HTMLDialogElement).close();
+    };
+    reader.readAsDataURL(file);
+  } else {
     await updateMember(member.id!, form);
     onUpdated();
     (document.getElementById("edit_member_modal") as HTMLDialogElement).close();
-  };
+  }
+};
+
 
   return (
     <dialog id="edit_member_modal" className="modal">
@@ -72,11 +86,21 @@ export default function EditMemberModal({
             value={form.github}
             onChange={(e) => setForm({ ...form, github: e.target.value })}
           />
+          <input
+            type="file"
+            accept="image/*"
+            className="file-input file-input-bordered w-full"
+            onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+          />
 
           {/* 🔒 Photo non modifiable ici pour simplifier */}
           {form.image && (
-            <div className="text-sm text-gray-500">Image actuelle : 
-              <img src={form.image} className="w-16 h-16 mt-1 rounded-full object-cover" />
+            <div className="text-sm text-gray-500">
+              Image actuelle :
+              <img
+                src={form.image}
+                className="w-16 h-16 mt-1 rounded-full object-cover"
+              />
             </div>
           )}
 
@@ -88,7 +112,11 @@ export default function EditMemberModal({
               type="button"
               className="btn"
               onClick={() =>
-                (document.getElementById("edit_member_modal") as HTMLDialogElement).close()
+                (
+                  document.getElementById(
+                    "edit_member_modal"
+                  ) as HTMLDialogElement
+                ).close()
               }
             >
               Annuler
@@ -97,5 +125,8 @@ export default function EditMemberModal({
         </form>
       </div>
     </dialog>
+    
   );
+  
 }
+
