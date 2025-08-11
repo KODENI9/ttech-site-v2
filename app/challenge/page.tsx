@@ -40,7 +40,7 @@ export default function ChallengePage() {
         {/* Partie 1 : Défi */}
         <div className="bg-base-100 p-8 shadow-xl rounded-xl">
           <h1 className="text-4xl font-bold mb-4 text-primary">
-            🧠 Casse-tête d’entrée
+            🧠 Casse-tête d entrée
           </h1>
           <p className="mb-4 text-lg">
             Bienvenue dans le défi de logique pour rejoindre la communauté{" "}
@@ -61,7 +61,7 @@ export default function ChallengePage() {
             <li>🔑 Le résultat final est ta **clé secrète**.</li>
           </ul>
           <p className="mt-6 text-base italic text-gray-500">
-            Le vrai test n'est pas le code... mais ta persévérance. 💡
+            Le vrai test n est pas le code... mais ta persévérance. 💡
           </p>
         </div>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../lib/server";
 import { EventModel } from "../types/Event";
 import { addEvent, deleteEvent, getEvents, updateEvent } from "../lib/auth";
@@ -9,7 +9,7 @@ import { ADMIN_EMAIL } from "../lib/config";
 
 export default function Evenements() {
   const [events, setEvents] = useState<EventModel[]>([]);
-  const [user, setUser] = useState<any>(null);
+   const [user, setUser] = useState<User | null>(null);
   const [newEvent, setNewEvent] = useState({ title: "", date: "", description: "" });
   const [editingEvent, setEditingEvent] = useState<EventModel | null>(null);
 

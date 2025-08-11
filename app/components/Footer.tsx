@@ -59,7 +59,7 @@ export default function Footer() {
         </p>
         <div className="space-x-4">
           <Link href="#">Politique de confidentialité</Link>
-          <Link href="#">Conditions d'utilisation</Link>
+          <Link href="#">Conditions d utilisation</Link>
         </div>
       </div>
     </footer>
