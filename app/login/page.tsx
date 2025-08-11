@@ -33,7 +33,7 @@ export default function LoginPage() {
       } else {
         router.push("/challenge");
       }
-    } catch (err: any) {
+    } catch {
       setError("Email ou mot de passe incorrect.");
     }
   };

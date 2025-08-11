@@ -6,12 +6,13 @@ import { MemberModel } from "../types/MemberModel";
 import { deleteMember, getMembers } from "../lib/auth";
 import { ADMIN_EMAIL } from "../lib/config";
 import { auth } from "../lib/server";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 import AddMemberModal from "./AddMemberModal";
+import Image from "next/image";
 
 export default function MembersSection() {
   const [members, setMembers] = useState<MemberModel[]>([]);
-  const [user, setUser] = useState<any>(null);
+   const [user, setUser] = useState<User | null>(null);
   const [memberToEdit, setMemberToEdit] = useState<MemberModel | null>(null);
 
   const fetchMembers = async () => {
@@ -65,9 +66,11 @@ export default function MembersSection() {
               {/* Image */}
               {m.image && (
                 <div className="flex justify-center">
-                  <img
+                  <Image
                     src={m.image}
                     alt={m.name}
+                    width={80}
+                    height={80}
                     className="w-20 h-20 rounded-full object-cover border-2 border-secondary shadow mb-2 group-hover:scale-105 transition"
                   />
                 </div>

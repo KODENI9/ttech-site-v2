@@ -27,7 +27,7 @@ export default function SuccessPage() {
             Ne partagez pas la clé : Laissez les meilleurs la trouver seul !
           </p>
           <p className="text-lg">
-            <strong>TTECH™</strong> n’est pas juste une communauté, c’est un foyer d’esprits audacieux qui façonnent l’avenir. Ne doute jamais de ton pouvoir de creer l'avenir.
+            <strong>TTECH™</strong> n’est pas juste une communauté, c est un foyer d’esprits audacieux qui façonnent l avenir. Ne doute jamais de ton pouvoir de creer l avenir.
             
           </p>
 

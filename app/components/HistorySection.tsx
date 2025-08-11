@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { HistoryModel } from "../types/HistoryModel";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../lib/server";
 import { deleteHistory, getHistories } from "../lib/auth";
 import { ADMIN_EMAIL } from "../lib/config";
@@ -11,7 +11,7 @@ import EditHistoryModal from "./EditHistoryModal";
 
 export default function HistorySection() {
   const [histories, setHistories] = useState<HistoryModel[]>([]);
-  const [user, setUser] = useState<any>(null);
+   const [user, setUser] = useState<User | null>(null);
   const [historyToEdit, setHistoryToEdit] = useState<HistoryModel | null>(null);
 
   useEffect(() => {

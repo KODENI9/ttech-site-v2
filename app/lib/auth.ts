@@ -1,11 +1,10 @@
 // lib/auth.ts
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword} from "firebase/auth";
 import { doc, setDoc, serverTimestamp, updateDoc, collection, addDoc, getDocs, deleteDoc } from "firebase/firestore";
 import { UserModel } from "../types/User";
-import { auth, db, storage } from "./server";
+import { auth, db, } from "./server";
 import { ProjectModel } from "../types/Project";
 import { MemberModel } from "../types/MemberModel";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { HistoryModel } from "../types/HistoryModel";
 import { EventModel } from "../types/Event";
 import { v4 as uuidv4 } from "uuid";
@@ -119,9 +118,9 @@ export async function deleteHistory(id: string) {
 
 const eventsRef = collection(db, "events");
 
-export const getEvents = async () => {
+export const getEvents = async (): Promise<EventModel[]> => {
   const snap = await getDocs(eventsRef);
-  return snap.docs.map((d) => ({ id: d.id, ...d.data() })) as any[];
+  return snap.docs.map((d) => ({ id: d.id, ...d.data() } as EventModel));
 };
 
 export const addEvent = async (event: Omit<EventModel, "id" | "createdAt">) => {

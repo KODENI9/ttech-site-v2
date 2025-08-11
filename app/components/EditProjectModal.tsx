@@ -2,15 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { updateProjectById } from "../lib/auth";
+import { ProjectModel } from "../types/Project";
 
 export default function EditProjectModal({
   project,
   onUpdated,
 }: {
-  project: any;
+  project: ProjectModel;
   onUpdated: () => void;
 }) {
-  const [form, setForm] = useState(project);
+  const [form, setForm] = useState<ProjectModel>(project);
 
   useEffect(() => {
     setForm(project);

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { MemberModel } from "../types/MemberModel";
 import { addMember } from "../lib/auth";
-import Loader from "./Loader";
 
 export default function AddMemberModal({ onAdded }: { onAdded: () => void }) {
     const [form, setForm] = useState<MemberModel>({

@@ -11,7 +11,7 @@ export default function Footer() {
         <div>
           <Image src={logo} alt="TTECH Logo" width={100} height={40} />
           <p className="text-sm">
-            Pionniers de l'innovation technologique africaine depuis 2023.
+            Pionniers de l innovation technologique africaine depuis 2023.
           </p>
           <div className="flex gap-3 mt-4">
             <Link href="#"><span className="btn btn-sm btn-outline rounded-full">Twitter</span></Link>
@@ -24,7 +24,7 @@ export default function Footer() {
           <h3 className="footer-title">🌍 Explorer</h3>
           <ul className="space-y-1 text-sm">
             <li><Link href="/">Accueil</Link></li>
-            <li><Link href="#">À propos</Link></li>
+            <li><Link href="#">A propos</Link></li>
             <li><Link href="#">Blog Tech</Link></li>
             <li><Link href="#">FAQ</Link></li>
           </ul>

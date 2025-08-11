@@ -18,7 +18,7 @@ export default function Hero() {
             Bienvenue chez <span className="text-primary">TTECH</span> 🚀
           </h1>
           <p className="py-6 text-lg">
-            Une communauté d'ingénieurs et développeurs passionnés prêts à changer le monde avec la technologie.
+            Une communauté d ingénieurs et développeurs passionnés prêts à changer le monde avec la technologie.
             Rejoins-nous et prouve ta valeur avec notre défi !
           </p>
           <div className="flex justify-center gap-4">

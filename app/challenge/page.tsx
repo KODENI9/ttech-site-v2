@@ -9,7 +9,7 @@ import logo from "../assets/logo-black.png";
 
 export default function ChallengePage() {
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
+  const [, setUser] = useState<User | null>(null);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -30,7 +30,7 @@ export default function ChallengePage() {
     if (password.trim().toLowerCase() === correctPassword) {
       router.push("/success");
     } else {
-      setError("❌ Ce n'est pas la bonne clé. Essaie encore, persévère !");
+      setError("❌ Ce n est pas la bonne clé. Essaie encore, persévère !");
     }
   };
 

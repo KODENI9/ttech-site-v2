@@ -9,10 +9,10 @@ import AddProjectModal from "./AddProjectModal";
 import { doc, getDoc } from "firebase/firestore";
 import EditProjectModal from "./EditProjectModal";
 import { ADMIN_EMAIL } from "../lib/config";
-
+import { User } from "firebase/auth";
 export default function ProjetsEnCours() {
     const [projects, setProjects] = useState<ProjectModel[]>([]);
-    const [user, setUser] = useState<any>(null);
+    const [user, setUser] = useState<User | null>(null);
     const [challengePassed, setChallengePassed] = useState(false);
     const [projectToEdit, setProjectToEdit] = useState<ProjectModel | null>(null);
 

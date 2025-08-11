@@ -1,6 +1,5 @@
 // components/layout/Layout.tsx
 import { ReactNode } from "react";
-import Link from "next/link";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 

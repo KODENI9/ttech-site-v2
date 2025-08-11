@@ -103,7 +103,7 @@ export default function Evenements() {
       {editingEvent && (
         <dialog id="edit_modal" className="modal modal-open">
           <div className="modal-box">
-            <h3 className="font-bold text-lg">✏️ Modifier l'événement</h3>
+            <h3 className="font-bold text-lg">✏️ Modifier l événement</h3>
             <input
               className="input input-bordered w-full mt-2"
               placeholder="Date"

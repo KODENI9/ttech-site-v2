@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { MemberModel } from "../types/MemberModel";
 import { updateMember } from "../lib/auth";
+import Image from "next/image";
 
 export default function EditMemberModal({
   member,
@@ -97,9 +98,12 @@ export default function EditMemberModal({
           {form.image && (
             <div className="text-sm text-gray-500">
               Image actuelle :
-              <img
-                src={form.image}
-                className="w-16 h-16 mt-1 rounded-full object-cover"
+              <Image
+              src={form.image}
+              width={16}
+              height={16}
+              className="mt-1 rounded-full object-cover"
+              alt="Membre"
               />
             </div>
           )}
